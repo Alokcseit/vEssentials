@@ -48,4 +48,31 @@ const getBanner = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { getBanner };
+const getBannerItem = asyncHandler(async (req, res, next) => {
+  try {
+    // Query the database to retrieve all banner items
+    const banners = await Banner.find();
+
+    // Check if banners exist
+    if (!banners || banners.length === 0) {
+      return next(new ApiError("Banner not found", 404));
+    }
+
+    // Extract image URLs and meta titles from banner items
+    const bannerData = banners.map((banner) => ({
+      imageUrl: banner.image,
+      metaTitle: banner.title,
+    }));
+
+    // Return the array of image URLs and meta titles as the response
+    return res.status(200).json({
+      success: true,
+      message: "Banner data retrieved successfully",
+      data: bannerData,
+    });
+  } catch (error) {
+    // Handle errors and pass them to the error handling middleware
+    return next(error);
+  }
+});
+export { getBanner, getBannerItem };
