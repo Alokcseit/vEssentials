@@ -8,5 +8,6 @@ router
   .route("/set")
   .post(upload.fields([{ name: "image", maxCount: 1 }]), getBanner);
 //write a get method
-router.get("/get", getBannerItem);
+router.route("/get").get(getBannerItem);
+
 export default router;
