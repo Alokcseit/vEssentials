@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
@@ -14,9 +14,9 @@ app.use(
     limit: "10mb",
   })
 );
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 app.use(express.static("public"));
+app.use(urlencoded({ extended: true }));
 
 import bannerRouter from "./routers/banner.router.js";
 app.use("/api/v1/banner", bannerRouter);
