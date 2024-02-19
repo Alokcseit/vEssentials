@@ -21,4 +21,8 @@ app.use(express.static("public"));
 import bannerRouter from "./routers/banner.router.js";
 app.use("/api/v1/banner", bannerRouter);
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 export { app };
