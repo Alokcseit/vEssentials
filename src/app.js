@@ -20,9 +20,7 @@ app.use(urlencoded({ extended: true }));
 
 import bannerRouter from "./routers/banner.router.js";
 app.use("/api/v1/banner", bannerRouter);
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+import categoryRouter from "./routers/category.router.js";
+app.use("/api/v1/category", categoryRouter);
 
 export { app };
