@@ -6,6 +6,19 @@ import { uploadFile } from "../utils/cloudinary.service.js";
 
 const getCategory = asyncHandler(async (req, res, next) => {
   // Implement getCategory functionality here
+  const categories = await Category.find();
+  if (!categories) {
+    throw new ApiError("Categories not found", 404);
+  }
+  const categoryData = categories.map((category) => ({
+    title: category.title,
+    image: category.image,
+  }));
+  return res.status(200).json({
+    success: true,
+    message: "Category data retrieved successfully",
+    data: categoryData,
+  });
 });
 
 const setCategory = asyncHandler(async (req, res, next) => {
